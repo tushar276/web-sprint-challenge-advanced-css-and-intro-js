@@ -135,3 +135,39 @@ button:hover{
 .artist img{
     width:100%;
 }
+@media all and (max-width: 500px) {
+
+    .myimg > div > div > img {
+      height: 100%;
+      width: 100%;
+      margin: 25px;
+      height: 30vh;
+  }
+    
+      .myimg > div > div {
+          width: 45%;
+          padding: 1%;
+          
+      }
+    
+      .containerimage
+      {
+          display: flex;
+          flex-direction:raw;
+          justify-content: center; 
+      align-items: center;
+      }
+      
+      
+      .mainimg > img {
+          height: auto;
+          width: 60%;
+          margin:25px;
+      }
+      
+      footer {
+          background-color: #eeeeee;
+          padding: 15px;
+      }
+  
+  } 
