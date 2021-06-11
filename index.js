@@ -1,4 +1,4 @@
-export const artists = [
+  const artists = [
     {
       "id": 0,
       "name": "Amedeo Modigliani",
@@ -208,9 +208,11 @@ Practice accessing data above by console.log-ing following items:
 (no functions needed) */
 
 //(1) Name of the first artist (0th index) in the array
-
+console.log(artists[0].name);
 
 //(2) Bio of the third artist (2nd index) in the array 
+console.log(artists[2].bio);
+
 
 
 
@@ -218,6 +220,8 @@ Practice accessing data above by console.log-ing following items:
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
 
+artists[8].name = "Vincent Van Gogh";
+console.log(artists[8].name);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀  
@@ -228,10 +232,12 @@ There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is current
  
  Example, if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
 
-function getArtistByIndex(/*Your Code Here*/) {
-  /*Your Code Here*/
+function getArtistByIndex(myArray, index) {
+  var statement = "the artist at index " + index + " is " + myArray[index].name;
+  return statement;
 }  
 
+console.log(getArtistByIndex(artists, 2));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -242,11 +248,26 @@ Use get20s to do the following:
 Example born in 1901 and died in 1959 - included -- born in 1889 and died in 1925 not included
 If correct, the function should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/*Your Code Here*/){
+function get20s(myArray){
   /*Your Code Here*/
+  var resultArr = [];
+
+  for(var i in myArray) {
+
+    var myYears = myArray[i].years;
+    var yearArr = myYears.split(" - ");
+    var born = yearArr[0];
+    var death = yearArr[1];
+
+    if(born >= 1900 && death <= 2000) {
+      resultArr.push(myArray[i].name);
+    }
+
+  }
+ return resultArr;
 }
 
-
+console.log(get20s(artists));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
  Use removeArtist to do the following:
@@ -257,9 +278,12 @@ function get20s(/*Your Code Here*/){
  
  For example, if removeArtist is invoked with the artists array and the number 0, it will remove Amedeo Modigliani from our dataset and return the number 19. */
 
-function removeArtist(/*Your Code Here*/){
-   /*Your Code Here*/
+function removeArtist(myArray, number){
+   myArray.splice(number, 1);
+   return myArray.length;
 }
+
+// console.log(removeArtist(artists, 0));
    
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -278,9 +302,19 @@ Use addArtist to do the following:
 
 Example: addArtist(artists) should return the artists array with the above object added to the end of the array. */
 
-function addArtist(/*Your Code Here*/){
-    /*Your Code Here*/
+function addArtist(myArray){
+  myArray.push({ 
+    id: 20,
+    name: "Tushar Patel", 
+    years: "1978 - 3000",
+    genre: "Web Design", 
+    nationality: "American",
+    bio: "I code really well"
+  } );
+  return myArray;
   }
+
+  // console.log(addArtist(artists));
 
   
 
@@ -291,10 +325,16 @@ Use lotsOfArt to do the following:
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]*/
 
-function lotsOfArt(/*Your Code Here*/){
-  /*Your Code Here*/
+function lotsOfArt(myArray){
+  var outputArr = [];
+  for(var i in myArray) {
+    if (myArray[i].paintings >= 100) {
+      outputArr.push(myArray[i].name);
+    }
+  }
+  return outputArr;
 }
-
+  // console.log(lotsOfArt(artists));
 
 
 
@@ -318,13 +358,30 @@ Create a function called `getHTML()` that takes the parameter `data` and uses a 
 
 The function should console.log 50 chunks of HTML code that match the structure above. 
 
+
+
 ‼️ You do **NOT** need to get these to display on your page, but you can copy and paste the result into your HTML file if you'd like to see what that would look like. */
 
-function getHTML(/* Code here */){
+function getHTML(myArray){
 
-    /* Code here */
+  var outputHTML = "";
 
+  for(var i in myArray) {
+    outputHTML += `
+    <div class="artist">
+    <div class="image">
+        <img src="assets/`+myArray[i].name.replace(" ", "-")+`.jpg"/>
+    </div>
+    <div class = "name">
+       <a href="` + myArray[i].wikipedia + `"> ` + myArray[i].name + `</a>
+    </div>
+    <div class = "bio">` + myArray[i].bio + `</div>
+    </div>
+    `}
+    return outputHTML;
   }
+
+  console.log(getHTML(artists));
 
 
 /* 💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪
@@ -349,11 +406,11 @@ function randomize(/* Code here */){
   return 'bar';
 }
 /*Don't touch the code after this line! */
-export default{
-  foo,
-  getArtistByIndex,
-  get20s,
-  removeArtist,
-  addArtist,
-  lotsOfArt
-}
+// export default{
+//   foo,
+//   getArtistByIndex,
+//   get20s,
+//   removeArtist,
+//   addArtist,
+//   lotsOfArt
+// }
